@@ -2,6 +2,8 @@ import 'package:advice/core/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'components/body.dart';
+
 class AdvicePage extends StatelessWidget {
   const AdvicePage({super.key});
 
@@ -20,11 +22,11 @@ class AdvicePage extends StatelessWidget {
           )
         ],
         title: Text(
-          'Advice',
+          'Advicer',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
-      body: const Placeholder(),
+      body: const Body(),
     );
   }
 }
