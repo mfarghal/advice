@@ -1,7 +1,9 @@
 import 'package:advice/features/advice/3_presentation/pages/components/custom_button.dart';
 import 'package:advice/features/advice/3_presentation/pages/components/error_message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/advice_bloc.dart';
 import 'advice_field.dart';
 
 class Body extends StatelessWidget {
@@ -9,26 +11,33 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Center(
-              child: ErrorMessage(message: 'ooops somthing gone wrong')
-              /*AdviceField(advice: 'example advice - you day will ne good')*/
-
-              /*CircularProgressIndicator(
-                color: Theme.of(context).colorScheme.secondary,
-              )*/
-
-              /*Text(
-                'your advice is waiting for you .',
-                style: Theme.of(context).textTheme.headlineMedium,
-              )*/
-              ,
+              child: BlocBuilder<AdviceBloc, AdviceState>(
+                builder: (context, state) {
+                  if (state is AdviceInitial) {
+                    return Text(
+                      'your advice is waiting for you .',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    );
+                  } else if (state is AdviceStateLoading) {
+                    return CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.secondary);
+                  } else if (state is AdviceStateLoaded) {
+                    return AdviceField(advice: state.advice);
+                  } else if (state is AdviceStateError) {
+                    return ErrorMessage(message: state.message);
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
             ),
           ),
           const Center(child: CustomButton()),

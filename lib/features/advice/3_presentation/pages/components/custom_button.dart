@@ -1,4 +1,6 @@
+import 'package:advice/features/advice/3_presentation/bloc/advice_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key});
@@ -6,7 +8,8 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkResponse(
-      onTap: () {},
+      onTap: () =>
+          BlocProvider.of<AdviceBloc>(context).add(AdviceRequestedEvent()),
       child: Material(
         elevation: 20,
         borderRadius: BorderRadius.circular(15),

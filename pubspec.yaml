@@ -19,6 +19,7 @@ dependencies:
 
   # state management
   provider: ^6.0.5
+  flutter_bloc: ^8.1.3
 
 dev_dependencies:
   flutter_test:
