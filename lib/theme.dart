@@ -39,8 +39,8 @@ class AppTheme {
       fontSize: 16);
 
   static const TextTheme _lightTextTheme = TextTheme(
-    headline1: _lightHeadingText,
-    bodyText1: _lightBodyText,
+    headlineMedium: _lightHeadingText,
+    bodyMedium: _lightBodyText,
   );
 
   // *****************
@@ -53,8 +53,8 @@ class AppTheme {
       _lightBodyText.copyWith(color: _darkTextColorPrimary);
 
   static final TextTheme _darkTextTheme = TextTheme(
-    headline1: _darkThemeHeadingTextStyle,
-    bodyText1: _darkThemeBodyeTextStyle,
+    headlineMedium: _darkThemeHeadingTextStyle,
+    bodyMedium: _darkThemeBodyeTextStyle,
   );
 
   // *****************

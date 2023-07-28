@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'application/core/theme_service.dart';
+import 'core/services/theme_service.dart';
+import 'features/advice/3_presentation/pages/advice_page.dart';
 import 'theme.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home: const Placeholder(),
+        home: const AdvicePage(),
       );
     });
   }
