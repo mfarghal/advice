@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:advice/core/entities/exceptions.dart';
 import 'package:advice/core/entities/failure.dart';
 import 'package:advice/features/advice/data/datasources/advice_remote_datasource.dart';
@@ -17,10 +19,18 @@ class AdviceRepositoryImpl extends AdviceRepository {
     try {
       final result = await adviceRemoteDataSource.getRandomAdviceFromApi();
       return Right(result);
-    } on ServerException catch (_) {
-      return Left(ServerFailure(''));
-    } catch (_) {
-      return const Left(GeenralFailure(''));
+    }
+    //
+    on ServerException catch (_) {
+      return Left(ServerFailure());
+    }
+    //
+    on CacheException catch (_) {
+      return Left(CacheFailure());
+    }
+    //
+    catch (_) {
+      return Left(GeneralFailure());
     }
   }
 }
