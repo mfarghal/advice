@@ -1,9 +1,11 @@
 import 'package:advice/core/services/theme_service.dart';
-import 'package:advice/features/advice/3_presentation/bloc/advice_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../injection.dart';
+import '../bloc/advice_bloc.dart';
 import 'components/body.dart';
 
 class AdvicePageWrapperProvider extends StatelessWidget {
@@ -12,7 +14,7 @@ class AdvicePageWrapperProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdviceBloc(),
+      create: (context) => sl<AdviceBloc>(),
       child: const AdvicePage(),
     );
   }

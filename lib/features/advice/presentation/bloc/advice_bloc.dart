@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/entities/failure.dart';
-import '../../2_domain/usecases/advice_usecases.dart';
+import '../../domain/usecases/advice_usecases.dart';
 
 part 'advice_event.dart';
 part 'advice_state.dart';
 
 class AdviceBloc extends Bloc<AdviceEvent, AdviceState> {
-  final AdviceUseCases adviceUsecase = AdviceUseCases();
-  AdviceBloc() : super(AdviceInitial()) {
+  final AdviceUseCases adviceUsecase;
+  AdviceBloc(this.adviceUsecase) : super(AdviceInitial()) {
     on<AdviceRequestedEvent>((event, emit) async {
       emit(AdviceStateLoading());
       // execute
@@ -18,7 +18,7 @@ class AdviceBloc extends Bloc<AdviceEvent, AdviceState> {
       //
       failureOrSuccess.fold(
         (l) => emit(AdviceStateError(message: _mapFailureToMessage(l))),
-        (r) => AdviceStateLoaded(advice: r.advice),
+        (r) => emit(AdviceStateLoaded(advice: r.advice)),
       );
     });
   }
